@@ -4,6 +4,12 @@ require "moip"
 describe "Make payments with the MoIP API" do
 
   before :all do
+    MoIP.setup do |config|
+      config.uri = 'https://desenvolvedor.moip.com.br/sandbox'
+      config.token = 'token'
+      config.key = 'key'
+    end
+
     @pagador = { :nome => "Luiz Inácio Lula da Silva",
                 :login_moip => "lula",
                 :email => "presidente@planalto.gov.br",

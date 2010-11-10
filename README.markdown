@@ -24,21 +24,16 @@ Adicione a Gem ao Gemfile
 
 ## Utilização
 
-O MoIP possui uma SandBox de testes que permite a simulação de pagamentos. Para utilizar a Gem com o SandBox, crie o arquivo moip.yml na pasta config do seu projeto Rails e adicione o token e chave do MoIP.
+O MoIP possui uma SandBox de testes que permite a simulação de pagamentos. Para utilizar a Gem com o SandBox, adicione a seguinte configuração no arquivo do environment que deseja utilizar.
 
-## moip.yml
+### config/environments/development.rb
 
-	development:
-	    uri: https://desenvolvedor.moip.com.br/sandbox
-	    token: SEU_TOKEN
-	    key: SUA_KEY
+	MoIP.setup do |config|
+          config.uri = https://desenvolvedor.moip.com.br/sandbox
+	  config.token = SEU_TOKEN
+	  config.key = SUA_KEY
 
-	production:
-	    uri: 
-	    token: 
-	    key:
-
-Após realizar os testes na SandBox, você poderá fazer a mudança para o ambiente de produção do MoIP de maneira simples. Basta inserir o token e chave de produção no arquivo moip.yml.
+Após realizar os testes na SandBox, você poderá fazer a mudança para o ambiente de produção do MoIP de maneira simples. Basta inserir no arquivo de environment de produção o token e chave que serão utilizados. Por padrão a gem já utiliza a URI de produção do MoIP.
 
 ###Crie os dados do pagador
 

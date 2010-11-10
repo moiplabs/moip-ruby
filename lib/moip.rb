@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "rubygems"
+require 'active_support/core_ext/module/attribute_accessors'
 require 'httparty'
 require "nokogiri"
 
@@ -8,11 +9,24 @@ require "direct_payment"
 module MoIP
     include HTTParty
 
-    CONFIG = YAML.load_file("config/moip.yml")["development"]
+    # URI para acessar o serviço
+    mattr_accessor :uri
+    @@uri = 'https://www.moip.com.br'
+
+    # Token de autenticação
+    mattr_accessor :token
+
+    # Chave de acesso ao serviço
+    mattr_accessor :key
+
+    def self.setup
+      yield self
+    end
+
     STATUS = { 1 => "authorized", 2 => "started", 3 => "printed", 4 => "completed", 5 => "canceled", 6 => "analysing"}
 
-    base_uri "#{CONFIG["uri"]}/ws/alpha"
-    basic_auth CONFIG["token"], CONFIG["key"]
+    base_uri "#{self.uri}/ws/alpha"
+    basic_auth self.token, self.key
 
     class << self
 
@@ -42,7 +56,7 @@ module MoIP
       # Retorna a URL de acesso ao MoIP
       def moip_page(token)
         raise(StandardError, "É necessário informar um token para retornar os dados da transação") if token.nil?
-        "#{CONFIG["uri"]}/Instrucao.do?token=#{token}"
+        "#{self.uri}/Instrucao.do?token=#{token}"
       end
 
       # Monta o NASP
