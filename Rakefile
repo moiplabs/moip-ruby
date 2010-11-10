@@ -6,13 +6,15 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "moip"
-    gem.summary = %Q{Gem para utilização da API MoIP}
-    gem.description = %Q{Gem para utilização da API MoIP}
+    gem.summary = "Gem para utilização da API MoIP"
+    gem.description = "Gem para utilização da API MoIP"
     gem.email = "guilherme.ruby@gmail.com"
     gem.homepage = "http://github.com/guinascimento/moip"
     gem.authors = ["Guilherme Nascimento"]
-#    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "rspec", "~> 2.1.0"
+    gem.add_dependency "nokogiri", "~> 1.4.3"
+    gem.add_dependency "httparty", "~> 0.6.1"
+    gem.add_dependency "activesupport", '>= 2.3.2'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

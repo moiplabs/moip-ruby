@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     moip (1.0.1)
+      activesupport (>= 2.3.2)
+      httparty (~> 0.6.1)
+      nokogiri (~> 1.4.3)
 
 GEM
   remote: http://rubygems.org/
@@ -26,7 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (>= 2.3.2)
-  httparty
+  httparty (~> 0.6.1)
   moip!
-  nokogiri
-  rspec
+  nokogiri (~> 1.4.3)
+  rspec (~> 2.1.0)

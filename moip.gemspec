@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Guilherme Nascimento"]
-  s.date = %q{2010-11-02}
+  s.date = %q{2010-11-10}
   s.description = %q{Gem para utilização da API MoIP}
   s.email = %q{guilherme.ruby@gmail.com}
   s.extra_rdoc_files = [
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     "Gemfile",
+     "Gemfile.lock",
      "LICENSE",
      "README.markdown",
      "Rakefile",
@@ -26,8 +28,7 @@ Gem::Specification.new do |s|
      "lib/direct_payment.rb",
      "lib/moip.rb",
      "moip.gemspec",
-     "spec/lib/config.yaml",
-     "spec/lib/moip_spec.rb"
+     "spec/moip_spec.rb"
   ]
   s.homepage = %q{http://github.com/guinascimento/moip}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -35,7 +36,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Gem para utilização da API MoIP}
   s.test_files = [
-    "spec/lib/moip_spec.rb"
+    "spec/moip_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -43,9 +44,21 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<rspec>, ["~> 2.1.0"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.3"])
+      s.add_runtime_dependency(%q<httparty>, ["~> 0.6.1"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.2"])
     else
+      s.add_dependency(%q<rspec>, ["~> 2.1.0"])
+      s.add_dependency(%q<nokogiri>, ["~> 1.4.3"])
+      s.add_dependency(%q<httparty>, ["~> 0.6.1"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.2"])
     end
   else
+    s.add_dependency(%q<rspec>, ["~> 2.1.0"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.4.3"])
+    s.add_dependency(%q<httparty>, ["~> 0.6.1"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.2"])
   end
 end
 
