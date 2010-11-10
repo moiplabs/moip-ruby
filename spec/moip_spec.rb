@@ -1,3 +1,4 @@
+# encoding: utf-8
 require "moip"
 
 describe "Make payments with the MoIP API" do
