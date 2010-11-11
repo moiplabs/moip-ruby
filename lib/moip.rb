@@ -36,10 +36,7 @@ module MoIP
 
         raise(StandardError, "Ocorreu um erro ao chamar o webservice") if full_data.nil?
 
-        response = full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"]
-        raise(StandardError, response["Erro"]) if response["Status"] == "Falha"
-
-        response
+        get_response!( full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"] )
       end
 
       # Consulta dos dados das autorizações e pagamentos associados à Instrução
@@ -47,10 +44,7 @@ module MoIP
         full_data = get("ConsultarInstrucao/#{token}")
         raise(StandardError, "Ocorreu um erro ao chamar o webservice") if full_data.nil?
 
-        response = full_data["ns1:ConsultarTokenResponse"]["RespostaConsultar"]
-        raise(StandardError, response["Erro"]) if response["Status"] == "Falha"
-
-        response
+        get_response!(full_data["ns1:ConsultarTokenResponse"]["RespostaConsultar"])
       end
 
       # Retorna a URL de acesso ao MoIP
@@ -69,6 +63,13 @@ module MoIP
         notification[:payment_type]   = params["tipo_pagamento"]
         notification[:email]          = params["email_consumidor"]
         notification
+      end
+
+      private
+
+      def get_response!(data)
+        raise(StandardError, data["Erro"]) if data["Status"] == "Falha"
+        data
       end
 
     end
