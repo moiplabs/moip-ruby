@@ -39,7 +39,7 @@ module MoIP
         response = full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"]
         raise(StandardError, response["Erro"]) if response["Status"] == "Falha"
 
-        return response
+        response
       end
 
       # Consulta dos dados das autorizações e pagamentos associados à Instrução
@@ -50,7 +50,7 @@ module MoIP
         response = full_data["ns1:ConsultarTokenResponse"]["RespostaConsultar"]
         raise(StandardError, response["Erro"]) if response["Status"] == "Falha"
 
-        return response
+        response
       end
 
       # Retorna a URL de acesso ao MoIP
