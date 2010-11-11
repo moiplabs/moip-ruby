@@ -32,17 +32,14 @@ module MoIP
 
       # Envia uma instrução para pagamento único
       def checkout(attributes = {})
-        full_data = post('EnviarInstrucao/Unica', :body => DirectPayment.body(attributes))
-
-        raise(StandardError, "Ocorreu um erro ao chamar o webservice") if full_data.nil?
+        full_data = peform_action!(:post, 'EnviarInstrucao/Unica', :body => DirectPayment.body(attributes))
 
         get_response!( full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"] )
       end
 
       # Consulta dos dados das autorizações e pagamentos associados à Instrução
       def query(token)
-        full_data = get("ConsultarInstrucao/#{token}")
-        raise(StandardError, "Ocorreu um erro ao chamar o webservice") if full_data.nil?
+        full_data = peform_action!(:get, "ConsultarInstrucao/#{token}")
 
         get_response!(full_data["ns1:ConsultarTokenResponse"]["RespostaConsultar"])
       end
@@ -66,6 +63,12 @@ module MoIP
       end
 
       private
+
+      def peform_action!(action_name, url, options = {})
+        response = self.send(action_name, url, options)
+        raise(StandardError, "Ocorreu um erro ao chamar o webservice") if response.nil?
+        response
+      end
 
       def get_response!(data)
         raise(StandardError, data["Erro"]) if data["Status"] == "Falha"
