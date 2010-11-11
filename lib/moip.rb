@@ -23,7 +23,7 @@ module MoIP
       yield self
     end
 
-    STATUS = { 1 => "authorized", 2 => "started", 3 => "printed", 4 => "completed", 5 => "canceled", 6 => "analysing"}
+    STATUS = {1 => "authorized", 2 => "started", 3 => "printed", 4 => "completed", 5 => "canceled", 6 => "analysing"}
 
     base_uri "#{self.uri}/ws/alpha"
     basic_auth self.token, self.key
@@ -34,7 +34,7 @@ module MoIP
       def checkout(attributes = {})
         full_data = peform_action!(:post, 'EnviarInstrucao/Unica', :body => DirectPayment.body(attributes))
 
-        get_response!( full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"] )
+        get_response!(full_data["ns1:EnviarInstrucaoUnicaResponse"]["Resposta"])
       end
 
       # Consulta dos dados das autorizações e pagamentos associados à Instrução
