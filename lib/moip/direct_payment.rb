@@ -124,7 +124,14 @@ module MoIP
                   }
                 }
               end
-
+              
+              if attributes[:url_retorno]
+                # URL de retorno
+                xml.URLRetorno {
+                  xml.text attributes[:url_retorno]
+                }
+              end
+                
             }
           }
         end
