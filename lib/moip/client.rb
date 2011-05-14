@@ -3,7 +3,9 @@ require 'httparty'
 
 module MoIP
   class WebServerResponseError < StandardError ; end
+  class MissingConfigError < StandardError ; end
   class MissingTokenError < StandardError ; end
+  class MissingKeyError < StandardError ; end
 
   class Client
     include HTTParty
@@ -48,6 +50,13 @@ module MoIP
       private
 
       def peform_action!(action_name, url, options = {})
+
+        raise(MissingConfigError, "É necessário criar um arquivo de configuração para o moip. Veja mais em: https://github.com/moiplabs/moip-ruby") if MoIP.token.nil? && MoIP.key.nil?
+
+        raise(MissingTokenError, "É necessário informar um token na configuração") if MoIP.token.nil? || MoIP.token.empty?
+
+        raise(MissingKeyError, "É necessário informar um key na configuração") if MoIP.key.nil? || MoIP.key.empty?
+        
         response = self.send(action_name, url, options)
         raise(WebServerResponseError, "Ocorreu um erro ao chamar o webservice") if response.nil?
         response
