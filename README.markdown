@@ -29,7 +29,7 @@ O MoIP possui uma SandBox de testes que permite a simulação de pagamentos. Par
 ### config/environments/development.rb
 
     MoIP.setup do |config|
-      config.uri = https://desenvolvedor.moip.com.br/sandbox
+      config.uri = "https://desenvolvedor.moip.com.br/sandbox"
       config.token = SEU_TOKEN
       config.key = SUA_KEY
     end
