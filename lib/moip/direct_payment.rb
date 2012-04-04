@@ -27,7 +27,7 @@ module MoIP
   TipoRecebimento = %w{AVista Parcelado}
   TipoRestricao = %w{Autorizacao Pagamento}
   TipoStatus = %w{Sucesso Falha}
-  
+
   #
   TiposComInstituicao = %w{CartaoCredito CartaoCredito DebitoBancario}
 
@@ -37,23 +37,6 @@ module MoIP
 
       # Cria uma instrução de pagamento direto
       def body(attributes = {})
-
-#raise "#{attributes[:valor]}--#{attributes[:valor].to_f}"
-        raise(MissingPaymentTypeError, "É necessário informar a razão do pagamento") if attributes[:razao].nil?
-        raise(MissingPayerError, "É obrigatório passar as informarções do pagador") if attributes[:pagador].nil?
-
-        raise(InvalidValue, "Valor deve ser maior que zero.") if attributes[:valor].to_f <= 0.0
-        raise(InvalidPhone, "Telefone deve ter o formato (99)9999-9999.") if attributes[:pagador][:tel_fixo] !~ /\(\d{2}\)?\d{4}-\d{4}/
-        raise(InvalidCellphone, "Telefone celular deve ter o formato (99)9999-9999.") if attributes[:pagador][:tel_cel] !~ /\(\d{2}\)?\d{4}-\d{4}/
-
-        raise(MissingBirthdate, "É obrigatório passar as informarções do pagador") if TiposComInstituicao.include?(attributes[:forma]) && attributes[:data_nascimento].nil?
-
-        raise(InvalidExpiry, "Data de expiração deve ter o formato 01-00 até 12-99.") if TiposComInstituicao.include?(attributes[:forma]) && attributes[:expiracao] !~ /(1[0-2]|0\d)\/\d{2}/
-
-
-        raise(InvalidReceiving, "Recebimento é inválido. Escolha um destes: #{TipoRecebimento.join(', ')}") if !TipoRecebimento.include?(attributes[:recebimento]) && TiposComInstituicao.include?(attributes[:forma])
-
-        raise(InvalidInstitution, "A instituição #{attributes[:instituicao]} é inválida. Escolha uma destas: #{InstituicaoPagamento.join(', ')}") if  TiposComInstituicao.include?(attributes[:forma]) && !InstituicaoPagamento.include?(attributes[:instituicao])
 
         builder = Nokogiri::XML::Builder.new(:encoding => "UTF-8") do |xml|
 
@@ -164,14 +147,14 @@ module MoIP
                   }
                 }
               end
-              
+
               if attributes[:url_retorno]
                 # URL de retorno
                 xml.URLRetorno {
                   xml.text attributes[:url_retorno]
                 }
               end
-                
+
             }
           }
         end
