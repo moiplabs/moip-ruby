@@ -7,7 +7,7 @@ require 'rspec/core/rake_task'
 task :default => :spec
 RSpec::Core::RakeTask.new
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
