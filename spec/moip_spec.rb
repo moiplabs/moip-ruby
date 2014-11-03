@@ -25,17 +25,17 @@ describe "Make payments with the MoIP API" do
                 :cep => "70100-000",
                 :tel_fixo => "(61)3211-1221" }
 
-    @billet_without_razao = { :valor => "8.90", :id_proprio => id,
+    @billet_without_razao = { :valor => "8.90", :id_proprio => 1,
                               :forma => "BoletoBancario", :pagador => @pagador}
-    @billet = { :valor => "8.90", :id_proprio => id,
+    @billet = { :valor => "8.90", :id_proprio => 1,
                 :forma => "BoletoBancario", :pagador => @pagador ,
                 :razao=> "Pagamento" }
 
-    @debit = { :valor => "8.90", :id_proprio => id, :forma => "DebitoBancario",
+    @debit = { :valor => "8.90", :id_proprio => 1, :forma => "DebitoBancario",
                :instituicao => "BancoDoBrasil", :pagador => @pagador,
                :razao => "Pagamento"}
 
-    @credit = { :valor => "8.90", :id_proprio => id, :forma => "CartaoCredito",
+    @credit = { :valor => "8.90", :id_proprio => 1, :forma => "CartaoCredito",
                 :instituicao => "AmericanExpress",:numero => "345678901234564",
                 :expiracao => "08/11", :codigo_seguranca => "1234",
                 :nome => "João Silva", :identidade => "134.277.017.00",
@@ -164,7 +164,7 @@ describe "Make payments with the MoIP API" do
     #     end
     #
     #     it "should have status 'Falha' when a instituition is not passed as argument" do
-    #       @incorrect_debit = { :valor => "37.90", :id_proprio => id,
+    #       @incorrect_debit = { :valor => "37.90", :id_proprio => 1,
     #                            :forma => "DebitoBancario", :pagador => @pagador,
     #                            :razao => "Pagamento"}
     #
@@ -183,7 +183,7 @@ describe "Make payments with the MoIP API" do
     #     end
     #
     #     it "should raise an exception if payer informations were not passed" do
-    #       @incorrect_debit = { :valor => "37.90", :id_proprio => id,
+    #       @incorrect_debit = { :valor => "37.90", :id_proprio => 1,
     #                            :forma => "DebitoBancario",
     #                            :instituicao => "BancoDoBrasil",
     #                            :razao => "Pagamento"
@@ -208,7 +208,7 @@ describe "Make payments with the MoIP API" do
     #     end
     #
     #     it "should have status 'Falha' when the card informations were not passed as argument" do
-    #       @incorrect_credit = { :valor => "8.90", :id_proprio => id,
+    #       @incorrect_credit = { :valor => "8.90", :id_proprio => 1,
     #                             :forma => "CartaoCredito", :pagador => @pagador,
     #                             :razao => "Pagamento"
     #                           }
