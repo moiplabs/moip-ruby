@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency(%q<rspec>, ["~> 2.2.0"])
 
   gem.add_runtime_dependency(%q<nokogiri>, ["~> 1.5.0"])
-  gem.add_runtime_dependency(%q<httparty>, ["~> 0.6.1"])
+  gem.add_runtime_dependency(%q<httparty>, ["~> 0.8.3"])
   gem.add_runtime_dependency(%q<activesupport>, [">= 2.3.2"])
 end
