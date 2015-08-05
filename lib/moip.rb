@@ -35,7 +35,7 @@ module MoIP
     yield self
   end
 
-  STATUS = {1 => "authorized", 2 => "started", 3 => "printed", 4 => "completed", 5 => "canceled", 6 => "analysing"}
+  STATUS = {1 => "authorized", 2 => "started", 3 => "printed", 4 => "completed", 5 => "canceled", 6 => "analysing", 7 => "chargeback", 9 =>"refunded"}
 
   class << self
     def checkout(attributes = {})
